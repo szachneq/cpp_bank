@@ -1,9 +1,8 @@
 #ifndef BANK_H
 #define BANK_H
 
-#include "account.h"
-
-class Account;
+#include "bank.fwd.h"
+#include "account.fwd.h"
 
 class Bank {
     public:
