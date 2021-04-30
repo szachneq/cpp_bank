@@ -1,5 +1,5 @@
-#ifndef BANK_H_DEFINED
-#define BANK_H_DEFINED
+#ifndef BANK_H
+#define BANK_H
 
 #include "account.h"
 
@@ -10,4 +10,4 @@ class Bank {
     Account *account;
 };
 
-#endif // BANK_H_DEFINED
+#endif // BANK_H
