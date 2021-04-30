@@ -24,6 +24,7 @@ class Employee {
 	const char *getSurname();
 	const int getId();
 	const Bank *getEmployer();
+	void setEmployer(Bank *bank);
 
 	bool join(const Bank &bank);
 

@@ -9,21 +9,23 @@
 const int MAX_EMPLOYEES = 3;
 
 class Bank {
-    private:
+	private:
 	char *name;
 
-    struct AccountElement {
-        Account *account;
-        AccountElement *next;
-	};
-	// linked list of accounts
-	AccountElement* aHead;
+	struct EmployeeNode {
+		Employee *employee;
+		EmployeeNode *next;
+	}
+	// linked list of employees
+	EmployeeNode *employees;
+	int numEmployees;
 
-    public:
-    Bank(char *name);
-    ~Bank();
-    void addAccount(Account *account);
-    void removeAccount(Account *account);
+	public:
+	Bank(char *name);
+	~Bank();
+
+	bool employ(const Employee &employee);
+	void fire(const Employee &employee);
 };
 
 #endif // BANK_H

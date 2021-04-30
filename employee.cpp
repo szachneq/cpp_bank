@@ -36,6 +36,8 @@ const Bank *Employee::getEmployer() {
 	return this->employer;
 }
 
+void setEmployer(Bank *bank);
+
 bool Employee::join(const Bank &bank) {
 	return false;
 }
