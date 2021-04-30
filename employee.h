@@ -19,6 +19,12 @@ class Employee {
 	Employee(char *name, char *surname);
 	~Employee();
 
+	// How to return in such a way that outside user cannot alter the string???
+	const char *getName();
+	const char *getSurname();
+	const int getId();
+	const Bank *getEmployer();
+
 	bool join(const Bank &bank);
 
 	// employee is always able to leave his job

@@ -20,6 +20,22 @@ Employee::~Employee() {
 	// something like employer->removeEmployee(this);
 }
 
+const char *Employee::getName() {
+	return this->name;
+}
+
+const char *Employee::getSurname() {
+	return this->surname;
+}
+
+const int Employee::getId() {
+	return this->id;
+}
+
+const Bank *Employee::getEmployer() {
+	return this->employer;
+}
+
 bool Employee::join(const Bank &bank) {
 	return false;
 }
