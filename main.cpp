@@ -5,10 +5,13 @@
 
 int main() {
     std::cout << "Hello, world!" << std::endl;
-    Bank *b = new Bank;
     Account *a = new Account;
-    b->account = a;
-    a->bank = b;
-    std::cout << b->account << std::endl;
-    std::cout << a->bank << std::endl;
+    a->setBalance(100.50);
+    std::cout << a->getBalance() << std::endl;
+
+    // Bank *b = new Bank;
+    // b->account = a;
+    // a->bank = b;
+    // std::cout << b->account << std::endl;
+    // std::cout << a->bank << std::endl;
 }

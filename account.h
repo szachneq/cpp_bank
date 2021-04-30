@@ -3,10 +3,19 @@
 
 #include "account.fwd.h"
 #include "bank.fwd.h"
+#include "customer.fwd.h"
 
 class Account {
-    public:
+    private:
     Bank *bank;
+    Customer *customer;
+    double balance;
+
+    public:
+    void setBank(Bank *bank);
+    Bank *getBank();
+    void setBalance(double balance);
+    double getBalance();
 };
 
 #endif // ACCOUNT_H
