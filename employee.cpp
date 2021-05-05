@@ -1,4 +1,4 @@
-#include <string.h>
+#include <cstring>
 #include "employee.h"
 
 int Employee::numCreated = 0;
@@ -36,14 +36,21 @@ const Bank *Employee::getEmployer() {
 	return this->employer;
 }
 
-void setEmployer(Bank *bank);
+const char *Employee::getEmployerName() {
+	return (this->getEmployer() != nullptr) ? this->getEmployer()->getName() : "unemployed";
+}
 
-bool Employee::join(const Bank &bank) {
-	return false;
+void Employee::setEmployer(Bank *bank) {
+	if (bank != nullptr) {
+		this->employer = bank;
+	}
+}
+
+bool Employee::join(Bank &bank) {
+	return bank.employ(*this);
 }
 
 void Employee::leave() {
-	// TODO - add a call to function on the employers side
-	// something like employer->removeEmployee(this);
+	this->employer->fire(*this);
 	this->employer = nullptr;
 }

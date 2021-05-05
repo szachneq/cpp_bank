@@ -5,6 +5,7 @@
 #include "account.fwd.h"
 #include "customer.fwd.h"
 #include "employee.fwd.h"
+#include "employee.h"
 
 const int MAX_EMPLOYEES = 3;
 
@@ -15,7 +16,7 @@ class Bank {
 	struct EmployeeNode {
 		Employee *employee;
 		EmployeeNode *next;
-	}
+	};
 	// linked list of employees
 	EmployeeNode *employees;
 	int numEmployees;
@@ -24,8 +25,12 @@ class Bank {
 	Bank(char *name);
 	~Bank();
 
-	bool employ(const Employee &employee);
-	void fire(const Employee &employee);
+	const char *getName() const;
+
+	void printEmployeeList();
+
+	bool employ(Employee &employee);
+	void fire(Employee &employee);
 };
 
 #endif // BANK_H

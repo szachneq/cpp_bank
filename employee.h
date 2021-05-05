@@ -3,6 +3,7 @@
 
 #include "employee.fwd.h"
 #include "bank.fwd.h"
+#include "bank.h"
 
 class Employee {
 	private:
@@ -19,14 +20,14 @@ class Employee {
 	Employee(char *name, char *surname);
 	~Employee();
 
-	// How to return in such a way that outside user cannot alter the string???
 	const char *getName();
 	const char *getSurname();
 	const int getId();
 	const Bank *getEmployer();
+	const char *getEmployerName();
 	void setEmployer(Bank *bank);
 
-	bool join(const Bank &bank);
+	bool join(Bank &bank);
 
 	// employee is always able to leave his job
 	// therefore boolean return is not needed - always successful
