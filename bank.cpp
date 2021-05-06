@@ -3,18 +3,27 @@
 #include "bank.h"
 
 Bank::Bank(char *name) {
-	this->name = new char[strlen(name)];
+	this->name = new char[strlen(name) + 1];
 	strcpy(this->name, name);
   this->employees = nullptr;
   this->numEmployees = 0;
 }
 
 Bank::~Bank() {
+	// fire all employees
+  Bank::EmployeeNode *m = Bank::employees;
+	while (m) {
+		m = m->next;
+		Bank::employees->employee->setEmployer(nullptr);
+		delete Bank::employees;
+		Bank::employees = m;
+	}
+	Bank::employees = nullptr;
+
+  // TODO all accounts closed and money returned to customers !!!
+
+	// deallocate memory
 	delete[] this->name;
-  // TODO - method that informs all other objects associated
-  // about the deletion
-  // employees are getting fired
-  // all accounts closed and money returned to customers
 }
 
 const char *Bank::getName() const {
@@ -47,16 +56,6 @@ bool Bank::employ(Employee &employee) {
 
   employee.setEmployer(this);
 
-	// struct EmployeeNode {
-	// 	Employee *employee;
-	// 	EmployeeNode *next;
-	// };
-	// // linked list of employees
-	// EmployeeNode *employees;
-  // add to the list of employees
-
-  // TODO check if given employee already works here
-
   Bank::EmployeeNode *newEmployee = new Bank::EmployeeNode;
   newEmployee->employee = &employee;
   newEmployee->next = Bank::employees;
@@ -67,6 +66,7 @@ bool Bank::employ(Employee &employee) {
 }
 
 void Bank::fire(Employee &employee) {
+	if (!Bank::employees) return;
   Bank::EmployeeNode *current = Bank::employees;
   Bank::EmployeeNode *prev = nullptr;
 

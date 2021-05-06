@@ -7,6 +7,10 @@
 #include "employee.h"
 #include "account.h"
 
+void test() {
+
+}
+
 int main() {
 	std::cout << "--- Start of tests ---" << std::endl;
 	Employee e1((char*)"Adam", (char*)"Nowak");
@@ -24,7 +28,11 @@ int main() {
 	std::cout << e1.getEmployer()->getName() << std::endl;
 
 	Employee e2((char*)"Janusz", (char*)"Kowal");
+	Employee e8((char*)"Januszex", (char*)"Kowalex");
+	Employee e9((char*)"Ziomalex", (char*)"Nowax");
 	e2.join(b1);
+	e8.join(b1);
+	e9.join(b1);
 	std::cout << e2.getEmployerName() << std::endl;
 	b1.printEmployeeList();
 	e2.leave();
@@ -38,4 +46,34 @@ int main() {
 	b1.printEmployeeList();
 	b1.fire(e1);
 	b1.printEmployeeList();
+
+
+	Bank *b2 = new Bank((char*)"Bank 2");
+	Employee e3((char*)"Test", (char*)"Jeden");
+	Employee e4((char*)"Tester", (char*)"Dwa");
+	e3.join(*b2);
+	e4.join(*b2);
+	std::cout << e3.getEmployerName() << std::endl;
+	std::cout << e4.getEmployerName() << std::endl;
+	delete b2;
+	std::cout << e3.getEmployerName() << std::endl;
+	std::cout << e4.getEmployerName() << std::endl;
+
+	std::cout << std::endl << std::endl;
+
+	Bank b3((char*)"Bank 3");
+	Employee *et = new Employee((char*)"Pracownik", (char*)"Wskaznik");
+	et->join(b3);
+	b3.printEmployeeList();
+	delete et;
+	b3.printEmployeeList();
+
+	Bank b4((char*)"Bank 4");
+	Employee e420((char*)"zdradziecki", (char*)"zdrajca");
+	e420.join(b4);
+	e420.join(b3);
+	b4.printEmployeeList();
+	b3.printEmployeeList();
+
+	return 0;
 }

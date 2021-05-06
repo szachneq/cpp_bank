@@ -1,12 +1,13 @@
 #include <cstring>
+#include <iostream>
 #include "employee.h"
 
 int Employee::numCreated = 0;
 
 Employee::Employee(char *name, char *surname) {
-	this->name = new char[strlen(name)];
+	this->name = new char[strlen(name) + 1];
 	strcpy(this->name, name);
-	this->surname = new char[strlen(surname)];
+	this->surname = new char[strlen(surname) + 1];
 	strcpy(this->surname, surname);
 	this->employer = nullptr;
 	this->id = Employee::numCreated + 1;
@@ -14,10 +15,9 @@ Employee::Employee(char *name, char *surname) {
 }
 
 Employee::~Employee() {
+	this->leave();
 	delete[] this->name;
 	delete[] this->surname;
-	// TODO - add a call to function on the employers side
-	// something like employer->removeEmployee(this);
 }
 
 const char *Employee::getName() {
@@ -41,9 +41,7 @@ const char *Employee::getEmployerName() {
 }
 
 void Employee::setEmployer(Bank *bank) {
-	if (bank != nullptr) {
-		this->employer = bank;
-	}
+	this->employer = bank;
 }
 
 bool Employee::join(Bank &bank) {
@@ -51,6 +49,7 @@ bool Employee::join(Bank &bank) {
 }
 
 void Employee::leave() {
+	if (this->employer) {
 	this->employer->fire(*this);
-	this->employer = nullptr;
+	}
 }
