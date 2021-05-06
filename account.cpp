@@ -1,17 +1,19 @@
 #include "account.h"
 
-void Account::setBank(Bank *bank) {
-    this->bank = bank;
+Account::Account(Bank &bank, Customer &customer) {
+    this->bank = &bank;
+    this->customer = &customer;
+    this->balance = 0.0;
 }
 
-Bank *Account::getBank() {
+const Bank *Account::getBank() const {
     return this->bank;
 }
 
-void Account::setBalance(double balance) {
-    this->balance = balance;
+const Customer *Account::getCustomer() const {
+    return this->customer;
 }
 
-double Account::getBalance() {
+double Account::getBalance() const{
     return this->balance;
 }
