@@ -49,16 +49,35 @@ bool Customer::openAccount(Bank &bank) {
 	return false;
 }
 
-bool closeAccount(Bank *bank) {
-	// if (this->employer) {
-	// this->employer->fire(*this);
-	// }
-	return true;
+bool Customer::closeAccount(Bank &bank) {
+	if (!this->accounts) return false;
+	bool bankRes = bank.closeAccount(*this);
+	if (bankRes) {
+		Customer::AccountNode *current = this->accounts;
+		Customer::AccountNode *prev = nullptr;
+		while(current != nullptr) {
+			if (current->account->getCustomer()->getId() == this->getId()) {
+				if (prev != nullptr) {
+					prev->next = current->next;
+				} else {
+					this->accounts = current->next;
+				}
+				// TODO when account is closed give all money back
+				delete current->account;
+				delete current;
+				break;
+			}
+			prev = current;
+			current = current->next;
+		}
+		return true;
+	}
+	return false;
 }
 
 void Customer::printAccountList() const {
 	Customer::AccountNode *current = this->accounts;
-	std::cout << this->getName() << this->getSurname() << " - Open Accounts:" << std::endl;
+	std::cout << this->getName() << " " << this->getSurname() << " - Open Accounts:" << std::endl;
 
 	if (current == nullptr) {
 		std::cout << "-- there are no accounts --" << std::endl;

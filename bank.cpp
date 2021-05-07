@@ -117,29 +117,21 @@ Account *Bank::openAccount(Customer &customer) {
 bool Bank::closeAccount(Customer &customer) {
 	if (!this->accounts) return false;
 	Bank::AccountNode *current = this->accounts;
-
-
-	// Bank::EmployeeNode *current = this->employees;
-  // Bank::EmployeeNode *prev = nullptr;
-	// 	if (!Bank::employees) return;
-  // Bank::EmployeeNode *current = this->employees;
-  // Bank::EmployeeNode *prev = nullptr;
-
-  // while(current != nullptr) {
-	// 	if (current->employee->getId() == employee.getId()) {
-	// 		if (prev != nullptr) {
-	// 			prev->next = current->next;
-	// 		} else {
-	// 			this->employees = current->next;
-	// 		}
-	// 		delete current;
-  //     employee.setEmployer(nullptr);
-  //     if (this->numEmployees > 0) this->numEmployees--;
-	// 		break;
-	// 	}
-	// 	prev = current;
-	// 	current = current->next;
-	// }
+	Bank::AccountNode *prev = nullptr;
+	while(current != nullptr) {
+		if (current->account->getCustomer()->getId() == customer.getId()) {
+			if (prev != nullptr) {
+				prev->next = current->next;
+			} else {
+				this->accounts = current->next;
+			}
+			// delete current;
+      // employee.setEmployer(nullptr);
+			break;
+		}
+		prev = current;
+		current = current->next;
+	}
 	return true;
 }
 

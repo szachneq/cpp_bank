@@ -34,7 +34,7 @@ class Customer {
 	const double getCash() const;
 
 	bool openAccount(Bank &bank);
-	bool closeAccount(Bank *bank);
+	bool closeAccount(Bank &bank);
 
 	void printAccountList() const;
 
