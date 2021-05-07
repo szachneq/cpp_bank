@@ -10,7 +10,8 @@ Customer::Customer(char* name, char *surname, double cash) {
 	this->surname = new char[strlen(surname) + 1];
 	strcpy(this->surname, surname);
 	this->cash = cash;
-	this->id = Customer::numCreated + 1;this->accounts = nullptr;
+	this->id = Customer::numCreated + 1;
+	this->accounts = nullptr;
 	Customer::numCreated += 1;
 }
 
@@ -26,6 +27,10 @@ const char* Customer::getName() const {
 
 const char* Customer::getSurname() const {
   return this->surname;
+}
+
+const int Customer::getId() const {
+	return this->id;
 }
 
 const double Customer::getCash() const {

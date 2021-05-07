@@ -30,6 +30,7 @@ class Customer {
 
 	const char* getName() const;
 	const char* getSurname() const;
+	const int getId() const;
 	const double getCash() const;
 
 	bool openAccount(Bank &bank);

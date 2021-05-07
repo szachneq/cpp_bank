@@ -29,6 +29,8 @@ class Bank {
 	};
 	AccountNode* accounts;
 
+	// Account *findAccount(Customer &customer);
+
 	public:
 	Bank(char *name);
 	~Bank();
@@ -41,7 +43,7 @@ class Bank {
 	void fire(Employee &employee);
 
 	Account *openAccount(Customer &customer);
-	// bool closeAccount(Customer *customer);
+	bool closeAccount(Customer &customer);
 
 	void printAccountList() const;
 };

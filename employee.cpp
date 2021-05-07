@@ -45,7 +45,9 @@ void Employee::setEmployer(Bank *bank) {
 }
 
 bool Employee::join(Bank &bank) {
+	
 	return bank.employ(*this);
+	// employee.setEmployer(this);
 }
 
 void Employee::leave() {
