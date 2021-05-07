@@ -12,16 +12,23 @@ int main() {
 	std::cout << "--- Start of tests ---" << std::endl << std::endl;
 
 	Customer c1((char*)"Adam", (char*)"Nowak", 500.0);
+	Customer c2((char*)"Jan", (char*)"Kowalski", 300.0);
 	std::cout << "Name:" << c1.getName() << std::endl;
 	std::cout << "Surname:" << c1.getSurname() << std::endl;
 	std::cout << "Cash:" << c1.getCash() << std::endl;
 
 	Bank b1((char*)"Bank 1");
 
-	Account a1(b1, c1);
-	std::cout << a1.getBank()->getName() << std::endl;
-	std::cout << a1.getCustomer()->getName() << std::endl;
-	std::cout << a1.getBalance() << std::endl;
+	// Account a1(b1, c1);
+	// std::cout << a1.getBank()->getName() << std::endl;
+	// std::cout << a1.getCustomer()->getName() << std::endl;
+	// std::cout << a1.getBalance() << std::endl;
+
+	c1.openAccount(b1);
+	c2.openAccount(b1);
+	b1.printAccountList();
+	c1.printAccountList();
+	c2.printAccountList();
 
 	// nice tests for later
 	// {

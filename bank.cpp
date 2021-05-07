@@ -6,6 +6,7 @@ Bank::Bank(char *name) {
 	this->name = new char[strlen(name) + 1];
 	strcpy(this->name, name);
   this->employees = nullptr;
+  this->accounts = nullptr;
   this->numEmployees = 0;
 }
 
@@ -18,7 +19,8 @@ Bank::~Bank() {
 		delete Bank::employees;
 		Bank::employees = m;
 	}
-	Bank::employees = nullptr;
+	this->employees = nullptr;
+	this->accounts = nullptr;
 
   // TODO all accounts closed and money returned to customers !!!
 
@@ -31,7 +33,7 @@ const char *Bank::getName() const {
 }
 
 void Bank::printEmployeeList() {
-  Bank::EmployeeNode *current = Bank::employees;
+  Bank::EmployeeNode *current = this->employees;
 
 	std::cout << this->getName() << " - Employees:" << std::endl;
 
@@ -58,8 +60,8 @@ bool Bank::employ(Employee &employee) {
 
   Bank::EmployeeNode *newEmployee = new Bank::EmployeeNode;
   newEmployee->employee = &employee;
-  newEmployee->next = Bank::employees;
-  Bank::employees = newEmployee;
+  newEmployee->next = this->employees;
+  this->employees = newEmployee;
 
   this->numEmployees++;
   return true;
@@ -67,7 +69,7 @@ bool Bank::employ(Employee &employee) {
 
 void Bank::fire(Employee &employee) {
 	if (!Bank::employees) return;
-  Bank::EmployeeNode *current = Bank::employees;
+  Bank::EmployeeNode *current = this->employees;
   Bank::EmployeeNode *prev = nullptr;
 
   while(current != nullptr) {
@@ -75,7 +77,7 @@ void Bank::fire(Employee &employee) {
 			if (prev != nullptr) {
 				prev->next = current->next;
 			} else {
-				Bank::employees = current->next;
+				this->employees = current->next;
 			}
 			delete current;
       employee.setEmployer(nullptr);
@@ -85,4 +87,38 @@ void Bank::fire(Employee &employee) {
 		prev = current;
 		current = current->next;
 	}
+}
+
+Account *Bank::openAccount(Customer &customer) {
+	// TODO any necessary checks like if customer already has an account
+	// if (something_bad) return nullptr;
+	// assume all good
+
+	Account *newAccount = new Account(*this, customer);
+	Bank::AccountNode *newNode = new Bank::AccountNode;
+	newNode->account = newAccount;
+	newNode->next = Bank::accounts;
+	Bank::accounts = newNode;
+
+	return newAccount;
+}
+
+void Bank::printAccountList() const {
+	Bank::AccountNode *current = this->accounts;
+
+	std::cout << this->getName() << " - Open Accounts:" << std::endl;
+
+	if (current == nullptr) {
+		std::cout << "-- there are no accounts --" << std::endl;
+	}
+
+	while(current) {
+		std::cout << " - " << current->account->getCustomer()->getName()
+      << " "<< current->account->getCustomer()->getSurname() 
+      << ", balance: " << current->account->getBalance() 
+      << std::endl;
+		current = current->next;
+	}
+
+	std::cout << std::endl;
 }
