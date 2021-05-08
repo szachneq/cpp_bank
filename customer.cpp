@@ -92,3 +92,17 @@ void Customer::printAccountList() const {
 
 	std::cout << std::endl;
 }
+
+bool Customer::deposit(Bank &bank, double amount) {
+	if (amount > this->cash) return false;
+
+	Customer::AccountNode *current = this->accounts;
+	while(current != nullptr) {
+		if (current->account->getBank() == &bank) {
+			this->cash -= amount;
+			current->account->deposit(amount);
+			return true;
+		}
+	}
+	return false;
+}

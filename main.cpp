@@ -19,8 +19,14 @@ int main() {
 	Bank b2((char*)"Bank 2");
 
 	c1.openAccount(b1);
+	c1.deposit(b1, 10);
 	c2.openAccount(b1);
+	c2.deposit(b1, 20);
 	c2.openAccount(b2);
+	c2.deposit(b2, 3000000);
+
+	std::cout << "C1: " << c1.getCash() << std::endl;
+	std::cout << "C2: " << c2.getCash() << std::endl;
 
 	b1.printAccountList();
 	b2.printAccountList();

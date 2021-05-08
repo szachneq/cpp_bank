@@ -19,7 +19,8 @@ double Account::getBalance() const{
 }
 
 bool Account::deposit(double amount) {
-	return false;
+	this->balance += amount;
+	return true;
 }
 
 bool Account::withdraw(double amount) {

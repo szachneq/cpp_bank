@@ -39,7 +39,7 @@ class Customer {
 	void printAccountList() const;
 
 	// const double getAccountBalance(Bank bank) const;
-	// bool deposit(Bank *bank, double amount);
+	bool deposit(Bank &bank, double amount);
 	// bool withdraw(Bank *bank, double amount);
 };
 
