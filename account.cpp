@@ -24,5 +24,7 @@ bool Account::deposit(double amount) {
 }
 
 bool Account::withdraw(double amount) {
-	return false;
+	if (amount > this->balance) return false;
+	this->balance -= amount;
+	return true;
 }

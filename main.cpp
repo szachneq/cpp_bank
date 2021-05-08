@@ -40,7 +40,9 @@ int main() {
 	c2.closeAccount(b2);
 	c2.printAccountList();
 
-
+	c2.withdraw(b1, 10);
+	c2.printAccountList();
+	b1.printAccountList();
 
 	// std::cout << "Name:" << c1.getName() << std::endl;
 	// std::cout << "Surname:" << c1.getSurname() << std::endl;

@@ -106,3 +106,15 @@ bool Customer::deposit(Bank &bank, double amount) {
 	}
 	return false;
 }
+
+bool Customer::withdraw(Bank &bank, double amount) {
+	Customer::AccountNode *current = this->accounts;
+	while(current != nullptr) {
+		if (current->account->getBank() == &bank) {
+			this->cash += amount;
+			current->account->withdraw(amount);
+			return true;
+		}
+	}
+	return false;
+}

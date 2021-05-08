@@ -40,7 +40,7 @@ class Customer {
 
 	// const double getAccountBalance(Bank bank) const;
 	bool deposit(Bank &bank, double amount);
-	// bool withdraw(Bank *bank, double amount);
+	bool withdraw(Bank &bank, double amount);
 };
 
 // class Customer {
