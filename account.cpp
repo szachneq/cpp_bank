@@ -23,12 +23,14 @@ double Account::getBalance() const{
 }
 
 bool Account::deposit(double amount) {
+	if (amount <= 0) return false;
 	if (!this->getBank()->isWorking()) return false;
 	this->balance += amount;
 	return true;
 }
 
 bool Account::withdraw(double amount) {
+	if (amount <= 0) return false;
 	if (amount > this->balance) return false;
 	this->balance -= amount;
 	return true;
