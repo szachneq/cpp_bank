@@ -10,7 +10,7 @@ Account::~Account() {
 	this->customer->closeAccount(*(this->bank));
 }
 
-const Bank *Account::getBank() const {
+Bank *Account::getBank() const {
 	return this->bank;
 }
 

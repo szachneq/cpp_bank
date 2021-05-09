@@ -16,7 +16,14 @@ Customer::Customer(char* name, char *surname, double cash) {
 }
 
 Customer::~Customer() {
-  // TODO - deal with accounts
+	// close all accounts
+	Customer::AccountNode *m = Customer::accounts;
+	while (m) {
+		m = m->next;
+		this->closeAccount(*(Customer::accounts->account->getBank()));
+		delete Customer::accounts;
+		Customer::accounts = m;
+	}
   delete[] this->name;
   delete[] this->surname;
 }

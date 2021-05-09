@@ -16,7 +16,7 @@ class Account {
     public:
     Account(Bank &bank, Customer &customer);
     ~Account();
-    const Bank *getBank() const;
+    Bank *getBank() const;
     Customer *getCustomer() const;
     double getBalance() const;
 
