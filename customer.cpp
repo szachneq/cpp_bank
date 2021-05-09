@@ -62,7 +62,8 @@ bool Customer::closeAccount(Bank &bank) {
 				} else {
 					this->accounts = current->next;
 				}
-				// TODO when account is closed give all money back
+				double balance = current->account->getBalance();
+				this->cash += balance;
 				delete current->account;
 				delete current;
 				break;
@@ -99,9 +100,10 @@ bool Customer::deposit(Bank &bank, double amount) {
 	Customer::AccountNode *current = this->accounts;
 	while(current != nullptr) {
 		if (current->account->getBank() == &bank) {
-			this->cash -= amount;
-			current->account->deposit(amount);
-			return true;
+			if (current->account->deposit(amount)) {
+				this->cash -= amount;
+				return true;
+			} else { return false; }
 		}
 	}
 	return false;
@@ -111,9 +113,10 @@ bool Customer::withdraw(Bank &bank, double amount) {
 	Customer::AccountNode *current = this->accounts;
 	while(current != nullptr) {
 		if (current->account->getBank() == &bank) {
-			this->cash += amount;
-			current->account->withdraw(amount);
-			return true;
+			if (current->account->withdraw(amount)) {
+				this->cash += amount;
+				return true;
+			} else { return false; }
 		}
 	}
 	return false;

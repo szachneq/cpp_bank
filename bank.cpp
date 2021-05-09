@@ -22,18 +22,25 @@ Bank::Bank(char *name) {
 }
 
 Bank::~Bank() {
-	// fire all employees
-  Bank::EmployeeNode *m = Bank::employees;
+	// return all money and close accounts
+	Bank::AccountNode *m = Bank::accounts;
 	while (m) {
 		m = m->next;
+		Bank::accounts->account->getCustomer()->closeAccount(*this);
+		delete Bank::accounts;
+		Bank::accounts = m;
+	}
+
+	// fire all employees
+  Bank::EmployeeNode *e = Bank::employees;
+	while (e) {
+		e = e->next;
 		Bank::employees->employee->setEmployer(nullptr);
 		delete Bank::employees;
-		Bank::employees = m;
+		Bank::employees = e;
 	}
 	this->employees = nullptr;
 	this->accounts = nullptr;
-
-  // TODO all accounts closed and money returned to customers !!!
 
 	// deallocate memory
 	delete[] this->name;
@@ -101,10 +108,20 @@ void Bank::fire(Employee &employee) {
 }
 
 Account *Bank::openAccount(Customer &customer) {
-	// TODO any necessary checks like if customer already has an account
-	// if (something_bad) return nullptr;
-	// assume all good
+	// check if bank is working
+	if (!this->isWorking()) return nullptr;
 
+	// check if customer already has account
+	Bank::AccountNode *current = this->accounts;
+	while(current != nullptr) {
+		if (current->account->getCustomer()->getId() == customer.getId()) {
+			return nullptr;
+			break;
+		}
+		current = current->next;
+	}
+
+	// if criteria met, create account
 	Account *newAccount = new Account(*this, customer);
 	Bank::AccountNode *newNode = new Bank::AccountNode;
 	newNode->account = newAccount;
@@ -125,8 +142,7 @@ bool Bank::closeAccount(Customer &customer) {
 			} else {
 				this->accounts = current->next;
 			}
-			// delete current;
-      // employee.setEmployer(nullptr);
+			delete current;
 			break;
 		}
 		prev = current;
@@ -153,4 +169,8 @@ void Bank::printAccountList() const {
 	}
 
 	std::cout << std::endl;
+}
+
+bool Bank::isWorking() const {
+	return (this->numEmployees > 0);
 }

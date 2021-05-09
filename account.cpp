@@ -6,11 +6,15 @@ Account::Account(Bank &bank, Customer &customer) {
 	this->balance = 0.0;
 }
 
+Account::~Account() {
+	this->customer->closeAccount(*(this->bank));
+}
+
 const Bank *Account::getBank() const {
 	return this->bank;
 }
 
-const Customer *Account::getCustomer() const {
+Customer *Account::getCustomer() const {
 	return this->customer;
 }
 
@@ -19,6 +23,7 @@ double Account::getBalance() const{
 }
 
 bool Account::deposit(double amount) {
+	if (!this->getBank()->isWorking()) return false;
 	this->balance += amount;
 	return true;
 }

@@ -15,8 +15,9 @@ class Account {
 
     public:
     Account(Bank &bank, Customer &customer);
+    ~Account();
     const Bank *getBank() const;
-    const Customer *getCustomer() const;
+    Customer *getCustomer() const;
     double getBalance() const;
 
     // subtracts given amount from customers cash and adds it to the account balance

@@ -11,38 +11,53 @@
 int main() {
 	std::cout << "--- Start of tests ---" << std::endl << std::endl;
 
-
-
+	Employee e1((char*)"John", (char*)"Snow");
 	Customer c1((char*)"Adam", (char*)"Nowak", 500.0);
-	Customer c2((char*)"Jan", (char*)"Kowalski", 300.0);
-	Bank b1((char*)"Bank 1");
-	Bank b2((char*)"Bank 2");
-
-	c1.openAccount(b1);
-	c1.deposit(b1, 10);
-	c2.openAccount(b1);
-	c2.deposit(b1, 20);
-	c2.openAccount(b2);
-	c2.deposit(b2, 3000000);
-
+	Bank *b1 = new Bank((char*)"Bank 1");
+	e1.join(*b1);
+	c1.openAccount(*b1);
+	c1.deposit(*b1, 100);
+	c1.printAccountList();
 	std::cout << "C1: " << c1.getCash() << std::endl;
-	std::cout << "C2: " << c2.getCash() << std::endl;
-
-	b1.printAccountList();
-	b2.printAccountList();
+	delete b1;
 	c1.printAccountList();
-	c2.printAccountList();
+	std::cout << "C1: " << c1.getCash() << std::endl;
 
-	c1.closeAccount(b1);
-	c1.closeAccount(b2);
-	c1.printAccountList();
+	// Employee e1((char*)"John", (char*)"Snow");
+	// Employee e2((char*)"Aleksander", (char*)"Ziomal");
 
-	c2.closeAccount(b2);
-	c2.printAccountList();
+	// Customer c1((char*)"Adam", (char*)"Nowak", 500.0);
+	// Customer c2((char*)"Jan", (char*)"Kowalski", 300.0);
+	// Bank b1((char*)"Bank 1");
+	// e1.join(b1);
+	// Bank b2((char*)"Bank 2");
+	// e2.join(b2);
 
-	c2.withdraw(b1, 10);
-	c2.printAccountList();
-	b1.printAccountList();
+	// c1.openAccount(b1);
+	// c1.deposit(b1, 10);
+	// c2.openAccount(b1);
+	// c2.deposit(b1, 20);
+	// c2.openAccount(b2);
+	// c2.deposit(b2, 5);
+
+	// std::cout << "C1: " << c1.getCash() << std::endl;
+	// std::cout << "C2: " << c2.getCash() << std::endl;
+
+	// b1.printAccountList();
+	// b2.printAccountList();
+	// c1.printAccountList();
+	// c2.printAccountList();
+
+	// c1.closeAccount(b1);
+	// c1.closeAccount(b2);
+	// c1.printAccountList();
+
+	// c2.closeAccount(b2);
+	// c2.printAccountList();
+
+	// c2.withdraw(b1, 10);
+	// c2.printAccountList();
+	// b1.printAccountList();
 
 	// std::cout << "Name:" << c1.getName() << std::endl;
 	// std::cout << "Surname:" << c1.getSurname() << std::endl;

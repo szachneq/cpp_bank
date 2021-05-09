@@ -46,6 +46,8 @@ class Bank {
 	bool closeAccount(Customer &customer);
 
 	void printAccountList() const;
+
+	bool isWorking() const;
 };
 
 #endif // BANK_H
