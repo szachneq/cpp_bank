@@ -24,6 +24,7 @@ Customer::~Customer() {
 		delete Customer::accounts;
 		Customer::accounts = m;
 	}
+	// deallocate memory
   delete[] this->name;
   delete[] this->surname;
 }
