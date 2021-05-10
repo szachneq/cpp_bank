@@ -64,7 +64,7 @@ bool Customer::closeAccount(Bank &bank) {
 		Customer::AccountNode *current = this->accounts;
 		Customer::AccountNode *prev = nullptr;
 		while(current != nullptr) {
-			if (current->account->getCustomer()->getId() == this->getId()) {
+			if (current->account->getBank() == &bank) {
 				if (prev != nullptr) {
 					prev->next = current->next;
 				} else {
@@ -72,7 +72,6 @@ bool Customer::closeAccount(Bank &bank) {
 				}
 				double balance = current->account->getBalance();
 				this->cash += balance;
-				delete current->account;
 				delete current;
 				break;
 			}
@@ -100,6 +99,10 @@ void Customer::printAccountList() const {
 	}
 
 	std::cout << std::endl;
+}
+
+void Customer::giveMoney(double amount) {
+	this->cash += amount;
 }
 
 bool Customer::deposit(Bank &bank, double amount) {

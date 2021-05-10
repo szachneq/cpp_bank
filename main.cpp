@@ -21,6 +21,8 @@ int main() {
 		std::cout << "Id: " << e1.getId() << std::endl;
 		std::cout << "Employer memory address: " << e1.getEmployer() << std::endl;
 		std::cout << "Employer name: " << e1.getEmployerName() << std::endl;
+		std::cout << std::endl;
+
 		// Test joining the company
 		Bank b1((char*)"Bank 1");
 		std::cout << "Before employment: " << std::endl;
@@ -30,11 +32,15 @@ int main() {
 		std::cout << "After employment: " << std::endl;
 		std::cout << "Employer name: " << e1.getEmployerName() << std::endl;
 		b1.printEmployeeList();
+		std::cout << std::endl;
+
 		// Test leaving the company
 		e1.leave();
 		std::cout << "After leaving: " << std::endl;
 		std::cout << "Employer name: " << e1.getEmployerName() << std::endl;
 		b1.printEmployeeList();
+		std::cout << std::endl;
+
 		// Test employer firing employee
 		e1.join(b1);
 		std::cout << "Before Firing: " << std::endl;
@@ -44,6 +50,8 @@ int main() {
 		std::cout << "After firing: " << std::endl;
 		std::cout << "Employer name: " << e1.getEmployerName() << std::endl;
 		b1.printEmployeeList();
+		std::cout << std::endl;
+
 		// Test if limit of employees is working
 		Employee e2((char*)"John", (char*)"Snow");
 		Employee e3((char*)"Aleksander", (char*)"Tester");
@@ -61,17 +69,24 @@ int main() {
 		std::cout << "e3 employer: " << e3.getEmployerName() << std::endl;
 		std::cout << "e4 employer: " << e4.getEmployerName() << std::endl;
 		b1.printEmployeeList(); // e4 (Janusz Kowal) should not be there
+		std::cout << std::endl;
+
 		// Unemployed employee leaving work should not break the program
 		std::cout << "e4 employer: " << e4.getEmployerName() << std::endl;
 		e4.leave();
 		std::cout << "e4 employer: " << e4.getEmployerName() << std::endl;
+		std::cout << std::endl;
+
 		// Unemployed employee being fired should not break the program
 		b1.fire(e4);
+
 		// Cannot employ employee if hes working in another company
 		Bank b2((char*)"Bank 2");
 		e1.join(b2);
 		std::cout << "e1 employer: " << e1.getEmployerName() << std::endl;
 		b2.printEmployeeList();
+		std::cout << std::endl;
+		
 		// Check if after one of the employees leaves the company another can join
 		b1.printEmployeeList();
 		e1.leave();
@@ -79,6 +94,7 @@ int main() {
 		e4.join(b1);
 		b1.printEmployeeList();
 		std::cout << "e4 employer: " << e4.getEmployerName() << std::endl;
+		std::cout << std::endl;
 	}
 
 	{
@@ -92,6 +108,7 @@ int main() {
 		delete e1;
 		std::cout << "After deletion" << std::endl;
 		b1.printEmployeeList();
+		std::cout << std::endl;
 	}
 
 	{
@@ -105,8 +122,8 @@ int main() {
 		delete b1;
 		std::cout << "After deletion" << std::endl;
 		std::cout << "e1 employer: " << e1.getEmployerName() << std::endl;
+		std::cout << std::endl;
 	}
-	std::cout << std::endl;
 
 	// Customer tests
 	{
@@ -117,11 +134,13 @@ int main() {
 		std::cout << "Id: " << c1.getId() << std::endl;
 		std::cout << "Cash: " << c1.getCash() << std::endl;
 		c1.printAccountList();
+
 		// Opening accounts should not be possible without employees
 		Bank b1((char*)"Bank 1");
 		c1.openAccount(b1);
 		b1.printAccountList();
 		c1.printAccountList();
+
 		// Test opening account when necessary conditions are met (employees present)
 		Employee e1((char*)"Wladek", (char*)"Pracowniczy");
 		e1.join(b1);
@@ -162,6 +181,8 @@ int main() {
 		b1.printAccountList();
 		c1.printAccountList();
 		std::cout << "C1 cash: " << c1.getCash() << std::endl;
+		std::cout << std::endl;
+
 		// cannot deposit money if no employees
 		e1.leave();
 		std::cout << "Before deposit: " << std::endl;
@@ -177,36 +198,118 @@ int main() {
 		std::cout << std::endl;
 
 		// Test money withdrawal (test bool value)
+		std::cout << "Before withdrawal: " << std::endl;
+		b1.printAccountList();
+		c1.printAccountList();
+		std::cout << "C1 cash: " << c1.getCash() << std::endl;
+		std::cout << "After withdrawal: " << std::endl;
+		bool r4 = c1.withdraw(b1, 1000); // should be true
+		std::cout << "result: " << r4 << std::endl;
+		b1.printAccountList();
+		c1.printAccountList();
+		std::cout << "C1 cash: " << c1.getCash() << std::endl;
 		std::cout << std::endl;
 
 		// Try to withdraw more money than the account balance is (test bool value)
+		std::cout << "Before withdrawal: " << std::endl;
+		b1.printAccountList();
+		c1.printAccountList();
+		std::cout << "C1 cash: " << c1.getCash() << std::endl;
+		std::cout << "After withdrawal: " << std::endl;
+		bool r5 = c1.withdraw(b1, 999999); // should be false
+		std::cout << "result: " << r5 << std::endl;
+		b1.printAccountList();
+		c1.printAccountList();
+		std::cout << "C1 cash: " << c1.getCash() << std::endl;
 		std::cout << std::endl;
 
 		// Customer cant withdraw or deposit negative (or 0) amount of money
+		std::cout << "Before withdrawal: " << std::endl;
+		b1.printAccountList();
+		c1.printAccountList();
+		std::cout << "C1 cash: " << c1.getCash() << std::endl;
+		std::cout << "After withdrawal: " << std::endl;
+		bool r6 = c1.withdraw(b1, -100); // should be false
+		std::cout << "result: " << r6 << std::endl;
+		b1.printAccountList();
+		c1.printAccountList();
+		std::cout << "C1 cash: " << c1.getCash() << std::endl;
 		std::cout << std::endl;
 
-		// Customer cannot deposit/withdraw if he has no account in this bank
+		// Customer cannot deposit if he has no account in this bank
+		Customer c2((char*)"Adam", (char*)"Nowak", 1000);
+		std::cout << "Before deposit: " << std::endl;
+		c2.printAccountList();
+		std::cout << "C2 cash: " << c2.getCash() << std::endl;
+		std::cout << "After deposit: " << std::endl;
+		bool r7 = c1.deposit(b1, 100); // should be false
+		std::cout << "result: " << r7 << std::endl;
+		c2.printAccountList();
+		std::cout << "C2 cash: " << c2.getCash() << std::endl;
+		std::cout << std::endl;
+
+		// Customer cannot withdraw if he has no account in this bank
+		std::cout << "Before withdrawal: " << std::endl;
+		c2.printAccountList();
+		std::cout << "C2 cash: " << c2.getCash() << std::endl;
+		std::cout << "After withdrawal: " << std::endl;
+		bool r8 = c1.withdraw(b1, 100); // should be false
+		std::cout << "result: " << r8 << std::endl;
+		c2.printAccountList();
+		std::cout << "C2 cash: " << c2.getCash() << std::endl;
 		std::cout << std::endl;
 
 		// Test closing account (by customer)
-		std::cout << std::endl;
-
-		// Test closing account (by bank)
-		std::cout << std::endl;
-
-		// Bank cannot close account if customer is not there
+		std::cout << "Before deletion: " << std::endl;
+		b1.printAccountList();
+		c1.printAccountList();
+		std::cout << "C1 cash: " << c1.getCash() << std::endl;
+		std::cout << "After deletion: " << std::endl;
+		c1.closeAccount(b1);
+		b1.printAccountList();
+		c1.printAccountList();
+		std::cout << "C1 cash: " << c1.getCash() << std::endl;
 		std::cout << std::endl;
 
 		// Customer cannot close account if he has no account in this bank
-		std::cout << std::endl;
-
-		// Deleting customer should inform banks and close all its accounts
-		std::cout << std::endl;
-
-		// Deleting bank should inform all customers, refund all money and close accounts
+		b1.printAccountList();
+		Customer c3((char*)"Krzysztof", (char*)"Nowy", 3000);
+		c3.closeAccount(b1);
+		b1.printAccountList();
 		std::cout << std::endl;
 	}
-		std::cout << std::endl;
 
+	{
+		// Deleting customer should inform banks and close all its accounts
+		Customer *c1 = new Customer((char*)"Jan", (char*)"Kowalski", 5000);
+		Bank b1((char*)"Bank 1");
+		Employee e1((char*)"Pan", (char*)"Pracownik");
+		e1.join(b1);
+		c1->openAccount(b1);
+		c1->deposit(b1, 2500);
+		c1->printAccountList();
+		b1.printAccountList();
+		delete c1;
+		b1.printAccountList();
+		std::cout << std::endl;
+	}
+
+	{
+		// Deleting bank should inform all customers, refund all money and close accounts
+		Customer c1((char*)"Jan", (char*)"Kowalski", 5000);
+		Bank *b1 = new Bank((char*)"Bank 1");
+		Employee e1((char*)"Pan", (char*)"Pracownik");
+		e1.join(*b1);
+		c1.openAccount(*b1);
+		c1.deposit(*b1, 2500);
+		c1.printAccountList();
+		b1->printAccountList();
+		delete b1;
+		c1.printAccountList();
+		std::cout << "C1 cash: " << c1.getCash() << std::endl;
+		std::cout << std::endl;
+	}
+
+	std::cout << std::endl;
 	return 0;
 }

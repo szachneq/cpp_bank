@@ -38,7 +38,7 @@ class Customer {
 
 	void printAccountList() const;
 
-	// const double getAccountBalance(Bank bank) const;
+	void giveMoney(double amount);
 	bool deposit(Bank &bank, double amount);
 	bool withdraw(Bank &bank, double amount);
 };

@@ -7,6 +7,7 @@ Account::Account(Bank &bank, Customer &customer) {
 }
 
 Account::~Account() {
+	this->customer->giveMoney(this->balance);
 	this->customer->closeAccount(*(this->bank));
 }
 
